@@ -1,0 +1,79 @@
+db:
+  username: ${username.value:postgres}
+  password: pass
+  driver: PostgresDriver
+  url: postgres:5432
+  hosts: localhost,127.0.0.1
+  properties:
+    first: 123
+    second: 567
+    third.value: Third
+  pool:
+    size: 12
+    timeout: 10
+  pools:
+    - size: 1
+      timeout: 1
+    - size: 2
+      timeout: 2
+    - size: 3
+      timeout: 3
+
+spring.profiles.active: qa
+
+app.common.logging:
+  enabled: true
+  level: INFO
+
+logging:
+  level:
+    root: INFO
+    com.dmdev.spring.database.pool: INFO
+    org.springframework.jdbc.core: TRACE
+  file:
+    name: alexprokopiev.log
+    path: /
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: alexprokopiev
+    password: admin
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    properties.hibernate:
+      batch_size: 50
+      fetch_size: 50
+      show_sql: true
+      format_sql: true
+      hbm2ddl.auto: validate
+    open-in-view: false
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
+    format:
+      date: iso
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            clientId: 620446768299-es2kadtd5sqiqcpodqdq2vppce168kov.apps.googleusercontent.com
+            clientSecret: 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
+            redirectUri: http://localhost:8080/login/oauth2/code/google
+            scope:
+              - openid
+              - email
+              - profile
+  messages:
+    basename: messages
+springdoc:
+  swagger-ui:
+    oauth:
+      client-id: 620446768299-es2kadtd5sqiqcpodqdq2vppce168kov.apps.googleusercontent.com
+      client-secret: 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
+      scopes:
+        - openid
+        - email
+        - profile
+    oauth2-redirect-url: http://localhost:8080/swagger-ui/oauth2-redirect.html
